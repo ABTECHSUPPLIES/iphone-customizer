@@ -3,17 +3,17 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 # iPhone models with colors, storage, pricing, and images
 IPHONE_DATA = {
-    "iPhone 11": {
-        "base_price": 499,
-        "colors": ["Black", "White", "Green", "Yellow", "Purple", "Red"],
-        "storage": {64: 0, 128: 50, 256: 100},
-        "images": {
-               "Black": "static/images/iphone_11/Black/iphone11-black.jpeg",
-    "White": "static/images/iphone_11/White/Apple iPhone 11 Pro_ Aesthetic Christmas Gift in Black and White.jpeg",
-    "Green": "static/images/iphone_11/Green/Iphone 11 green💚.jpeg",
-    "Yellow": "static/images/iphone_11/Yellow/iPhone 11 yellow baby💜😁❤️.jpeg",
-    "Purple": "static/images/iphone_11/Purple/download.jpeg",
-    "Red": "static/images/iphone_11/Red/We Heart It.jpeg"
+       "iPhone 11": {
+                "base_price": 499,
+                "colors": ["Black", "White", "Green", "Yellow", "Purple", "Red"],
+                "storage": {64: 0, 128: 50, 256: 100},
+                "images": {
+                               "Black": "static/images/iphone_11/Black/iphone11-black.jpeg",
+                                "White": "static/images/iphone_11/White/Apple iPhone 11 Pro_ Aesthetic Christmas Gift in Black and White.jpeg",
+                                "Green": "static/images/iphone_11/Green/Iphone 11 green💚.jpeg",
+                                "Yellow": "static/images/iphone_11/Yellow/iPhone 11 yellow baby💜😁❤️.jpeg",
+                                "Purple": "static/images/iphone_11/Purple/download.jpeg",
+                                "Red": "static/images/iphone_11/Red/We Heart It.jpeg"
         }
     },
     "iPhone 11 Pro": {
@@ -22,10 +22,10 @@ IPHONE_DATA = {
         "storage": {64: 0, 256: 150, 512: 350},
         "images": {
             
-    "Space Gray": "static/images/iPhone_11_Pro/Space_Gray/iPhone 11 Pro.jpeg",
-    "Silver": "static/images/iPhone_11_Pro/Silver/74ec4ae1-047a-426c-9c8b-4a0f87a95d09.jpeg",
-    "Gold": "static/images/iPhone_11_Pro/Gold/iPhone 11 Pro.jpeg",
-    "Midnight Green": "static/images/iPhone_11_Pro/Midnight_Green/iPhone 11 Pro Max (1).jpeg"
+                    "Space Gray": "static/images/iPhone_11_Pro/Space_Gray/iPhone 11 Pro.jpeg",
+                    "Silver": "static/images/iPhone_11_Pro/Silver/74ec4ae1-047a-426c-9c8b-4a0f87a95d09.jpeg",
+                    "Gold": "static/images/iPhone_11_Pro/Gold/iPhone 11 Pro.jpeg",
+                    "Midnight Green": "static/images/iPhone_11_Pro/Midnight_Green/iPhone 11 Pro Max (1).jpeg"
 
         }
     },

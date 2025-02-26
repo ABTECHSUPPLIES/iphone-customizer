@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPhone Customizer</title>
+  <!-- Link to CSS file using Flask's url_for -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Customize Your iPhone</h1>
+
+    <label>Select iPhone Model:</label>
+    <select id="iphone_model" onchange="updateOptions()">
+      {% for model in iphone_data.keys() %}
+        <option value="{{ model }}">{{ model }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Select Color:</label>
+    <select id="iphone_color" onchange="updateImage()"></select>
+
+    <label>Select Storage:</label>
+    <select id="iphone_storage" onchange="updatePrice()"></select>
+
+    <h2>Price: R<span id="iphone_price">0</span></h2>
+
+    <h3>Selected iPhone:</h3>
+    <img id="iphone_image" src="" alt="iPhone Image" width="300">
+
+    <button onclick="sendToWhatsApp()">Send to WhatsApp</button>
+  </div>
+
+  <script>
+    function updateOptions() {
+      let model = $("#iphone_model").val();
+  
+      $.ajax({
+        url: "/get_options",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ model: model }),
+        dataType: "json",
+        success: function(data) {
+          $("#iphone_color").empty();
+          data.colors.forEach(color => {
+            $("#iphone_color").append(`<option value="${color}">${color}</option>`);
+          });
+  
+          $("#iphone_storage").empty();
+          data.storage.forEach(storage => {
+            $("#iphone_storage").append(`<option value="${storage}GB">${storage}GB</option>`);
+          });
+  
+          // Select first available color and storage by default
+          if (data.colors.length > 0) {
+            $("#iphone_color").val(data.colors[0]);
+          }
+          if (data.storage.length > 0) {
+            $("#iphone_storage").val(data.storage[0] + "GB");
+          }
+  
+          updatePrice();
+          updateImage();
+        },
+        error: function(xhr, status, error) {
+          console.error("Error fetching options:", error);
+        }
+      });
+    }
+  
+    function updatePrice() {
+      let model = $("#iphone_model").val();
+      let storage = $("#iphone_storage").val().replace("GB", "");
+  
+      $.ajax({
+        url: "/get_price",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ model: model, storage: storage }),
+        dataType: "json",
+        success: function(data) {
+          $("#iphone_price").text(data.price);
+        },
+        error: function(xhr, status, error) {
+          console.error("Error fetching price:", error);
+        }
+      });
+    }
+  
+    function updateImage() {
+      let model = $("#iphone_model").val();
+      let color = $("#iphone_color").val();
+  
+      $.ajax({
+        url: "/get_image",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ model: model, color: color }),
+        dataType: "json",
+        success: function(data) {
+          if (data.image) {
+            $("#iphone_image").attr("src", data.image);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error("Error fetching image:", error);
+        }
+      });
+    }
+  
+    function sendToWhatsApp() {
+      let model = $("#iphone_model").val();
+      let color = $("#iphone_color").val();
+      let storage = $("#iphone_storage").val();
+      let price = $("#iphone_price").text();
+  
+      let message = `I'm interested in buying an ${model} (${color}, ${storage}) for R${price}.`;
+      let whatsappURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, "_blank");
+    }
+  
+    $(document).ready(function() {
+      updateOptions();
+    });
+  </script>
+</body>
+</html>

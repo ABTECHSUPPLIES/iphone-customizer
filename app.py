@@ -8,7 +8,7 @@ IPHONE_DATA = {
         "colors": ["Black", "White", "Green", "Yellow", "Purple", "Red"],
         "storage": {64: 0, 128: 50, 256: 100},
         "images": {
-               "Black": "static/images/iphone_11/Black/iphone11-black.jpeg.jpeg",
+               "Black": "static/images/iphone_11/Black/iphone11-black.jpeg",
     "White": "static/images/iphone_11/White/Apple iPhone 11 Pro_ Aesthetic Christmas Gift in Black and White.jpeg",
     "Green": "static/images/iphone_11/Green/Iphone 11 green💚.jpeg",
     "Yellow": "static/images/iphone_11/Yellow/iPhone 11 yellow baby💜😁❤️.jpeg",

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 # iPhone models with colors, storage, pricing, and images
 IPHONE_DATA = {
        "iPhone 11": {
